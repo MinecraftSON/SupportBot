@@ -25,6 +25,7 @@ public class Config {
         ymlFile.addDefault("bot.activity", "playing");
         ymlFile.addDefault("bot.action", "Minecraft");
         ymlFile.addDefault("bot.dataPath", "./data/");
+        ymlFile.addDefault("bot.response-path", "./responses/");
         ymlFile.addDefault("permission.founder-role-id", "000000000000000000");
         ymlFile.addDefault("permission.admin-role-id", "000000000000000000");
         ymlFile.addDefault("permission.mod-role-id", "000000000000000000");

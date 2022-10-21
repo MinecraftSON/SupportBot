@@ -8,6 +8,7 @@ import org.simpleyaml.configuration.file.YamlFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
 import java.util.EnumSet;
 
 public class Bot {
@@ -17,10 +18,20 @@ public class Bot {
     private static final Logger LOGGER = LoggerFactory.getLogger(Bot.class);
 
     public static void main(String[] args) throws Exception {
-        net.mcson.supportbot.Config.loadConfig();
-        String token = net.mcson.supportbot.Config.getConfig().getString("bot.token");
-        config = net.mcson.supportbot.Config.getConfig();
-        prefix = net.mcson.supportbot.Config.getConfig().getString("bot.prefix");
+        Config.loadConfig();
+        String token = Config.getConfig().getString("bot.token");
+        config = Config.getConfig();
+        prefix = Config.getConfig().getString("bot.prefix");
+        File dataFolder = new File(config.getString("bot.dataPath"));
+        File responseFolder = new File(config.getString("bot.response-path"));
+        if (!dataFolder.exists()) {
+            dataFolder.mkdirs();
+        }
+        if (!responseFolder.exists()) {
+            responseFolder.mkdirs();
+        }
+        IssueResponder.loadResponses();
+        Listener listener = new Listener();
 
         jda = JDABuilder.createDefault(token)
                 .disableCache(EnumSet.of(
@@ -29,8 +40,10 @@ public class Bot {
                         CacheFlag.EMOTE
                 ))
                 .enableCache(CacheFlag.VOICE_STATE)
-                .addEventListeners(new Listener())
+                .addEventListeners(listener)
                 .build();
+
+        listener.getCommandManager().registerSlashCommands();
         getActivity();
     }
 
