@@ -6,8 +6,10 @@ import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.mcson.supportbot.Bot;
-import net.mcson.supportbot.commands.AddKeywordCCmd;
+import net.mcson.supportbot.commands.AddKeywordCmd;
+import net.mcson.supportbot.commands.DebugCmd;
 import net.mcson.supportbot.commands.HelpCmd;
+import net.mcson.supportbot.commands.VerboseCmd;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,8 +29,10 @@ public class CommandManager {
 
     public CommandManager() {
         //Add to this list in alphabetical order
-        addCommand(new AddKeywordCCmd());
+        addCommand(new AddKeywordCmd());
+        addCommand(new DebugCmd());
         addCommand(new HelpCmd(this));
+        addCommand(new VerboseCmd());
     }
 
     private void addCommand(ICommand cmd) {

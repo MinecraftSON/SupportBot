@@ -11,7 +11,6 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.net.URL;
-import java.util.IntSummaryStatistics;
 import java.util.List;
 import java.util.UUID;
 
@@ -38,9 +37,15 @@ public class AttachmentReader {
                         attachment.downloadToFile(imgFile);
                     }
                     String ocrText = tesseract.doOCR(imgFile);
-                    //event.getMessage().reply(ocrText).queue(); // DEBUG: Sends OCR Text in chat
+                    if (CONFIG.getBoolean("verbose")) {
+                        event.getMessage().reply(ocrText).queue(); // DEBUG: Sends OCR text in chat
+                    }
                     imgFile.delete();
-                    event.getMessage().reply(IssueResponder.getResponse(ocrText)).queue();
+                    String response = IssueResponder.getResponse(ocrText);
+                    if (response == null) {
+                        return;
+                    }
+                    event.getMessage().reply(response).queue();
                 } else if (attachments.get(0).getFileExtension().equalsIgnoreCase("txt") | attachments.get(0).getFileExtension().equalsIgnoreCase("log")) {
                     channel.sendMessage("^ is a text or log file!").queue();
                 } else {
@@ -59,9 +64,15 @@ public class AttachmentReader {
             BufferedImage urlImg = ImageIO.read(new URL(message));
             ImageIO.write(urlImg, "png", imgFile);
             String ocrText = tesseract.doOCR(imgFile);
-            //event.getMessage().reply(ocrText).queue(); // DEBUG: Sends OCR text in chat
+            if (CONFIG.getBoolean("verbose")) {
+                event.getMessage().reply(ocrText).queue(); // DEBUG: Sends OCR text in chat
+            }
             imgFile.delete();
-            event.getMessage().reply(IssueResponder.getResponse(ocrText)).queue();
+            String response = IssueResponder.getResponse(ocrText);
+            if (response == null) {
+                return;
+            }
+            event.getMessage().reply(response).queue();
         } catch (final Exception e) {
             e.printStackTrace();
         }

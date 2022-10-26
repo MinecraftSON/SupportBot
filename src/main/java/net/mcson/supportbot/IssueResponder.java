@@ -54,4 +54,8 @@ public class IssueResponder {
             e.printStackTrace();
         }
     }
+
+    public static List<Keyword> getResponses() {
+        return responses;
+    }
 }

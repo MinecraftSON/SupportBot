@@ -6,7 +6,6 @@ import net.dv8tion.jda.api.events.ReadyEvent;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import net.mcson.supportbot.commands.util.CommandContext;
 import net.mcson.supportbot.commands.util.CommandManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,7 +1,6 @@
 package net.mcson.supportbot.commands;
 
 import com.google.gson.Gson;
-import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
@@ -16,7 +15,7 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.List;
 
-public class AddKeywordCCmd implements IPrefixCommand, ISlashCommand {
+public class AddKeywordCmd implements IPrefixCommand, ISlashCommand {
     @Override
     public void handle(CommandContext ctx) {
         List<String> args = ctx.getArgs();
