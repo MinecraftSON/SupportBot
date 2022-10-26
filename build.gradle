@@ -7,7 +7,7 @@ plugins {
 mainClassName = 'net.mcson.supportbot.Bot'
 
 group 'net.mcson.supportbot'
-version '1.0'
+version '1.2'
 
 sourceCompatibility = targetCompatibility = JavaVersion.VERSION_17
 
